@@ -1,5 +1,5 @@
 
-cmake_minimum_required(VERSION 3.1)
+cmake_minimum_required(VERSION 3.10)
 project(moonlight-common-c LANGUAGES C)
 
 set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
@@ -7,7 +7,7 @@ set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 option(USE_MBEDTLS "Use MbedTLS instead of OpenSSL" OFF)
 option(CODE_ANALYSIS "Run code analysis during compilation" OFF)
 
-SET(CMAKE_C_STANDARD 11)
+set(CMAKE_C_STANDARD 11)
 
 set(CMAKE_POSITION_INDEPENDENT_CODE_BACKUP ${CMAKE_POSITION_INDEPENDENT_CODE})
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
@@ -39,7 +39,7 @@ if(MSVC)
 elseif(MINGW)
   target_link_libraries(moonlight-common-c PRIVATE -lws2_32 -lwinmm)
 else()
-  target_compile_options(moonlight-common-c PRIVATE -Wall -Wextra -Wno-unused-parameter -Werror)
+  target_compile_options(moonlight-common-c PRIVATE -Wall -Wextra -Wno-unused-parameter)
   if (CODE_ANALYSIS AND CMAKE_C_COMPILER_ID STREQUAL "GNU")
     target_compile_options(moonlight-common-c PRIVATE -fanalyzer)
   endif()
